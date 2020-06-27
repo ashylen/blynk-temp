@@ -4,13 +4,14 @@ import "./App.css";
 import axios from "axios";
 
 const url = (token) => `https://blynk-cloud.com/${token}/project`;
+const defaultToken = "ee4ea75d8dc543df979af396f9fffe22";
 
 function App() {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const [input, setInput] = useState({ token: "" });
-  const [APIToken, setAPIToken] = useState("ee4ea75d8dc543df979af396f9fffe22");
+  const [APIToken, setAPIToken] = useState(defaultToken);
 
   const getData = async (token) => {
     try {
@@ -36,6 +37,8 @@ function App() {
     if (input && input.token) {
       setAPIToken(input.token);
       getData(input.token);
+    } else {
+      getData(defaultToken);
     }
 
     setInput({ token: "" });
