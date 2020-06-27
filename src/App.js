@@ -38,21 +38,12 @@ function App() {
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return (
     <div className="App">
       <header className="App-header">
-        <div className="form-wrapper">
-          <input
-            type="text"
-            name="token"
-            onChange={handleInputChange}
-            placeholder="Wprowadź token"
-          />
-          <button onClick={handleButtonClick}>Pobierz dane</button>
-        </div>
-
         <h1>Dane</h1>
         {data ? (
           <div>
@@ -74,6 +65,16 @@ function App() {
             <img src={logo} className="App-logo" alt="logo" />
           </div>
         )}
+
+        <div className="form-wrapper">
+          <input
+            type="text"
+            name="token"
+            onChange={handleInputChange}
+            placeholder="Wprowadź token"
+          />
+          <button onClick={handleButtonClick}>Pobierz dane</button>
+        </div>
 
         {error && <span>{error}</span>}
       </header>
