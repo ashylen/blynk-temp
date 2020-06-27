@@ -5,6 +5,11 @@ import axios from "axios";
 
 const url = (token) => `https://blynk-cloud.com/${token}/project`;
 const defaultToken = "ee4ea75d8dc543df979af396f9fffe22";
+// At request level
+// eslint-disable-next-line no-undef
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
 
 function App() {
   const [data, setData] = useState({});
@@ -21,6 +26,7 @@ function App() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
+        httpsAgent: agent,
       });
       setData(response.data);
     } catch (err) {
