@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
-import https from "https";
 
 const url = (token) => `http://blynk-cloud.com/${token}/project`;
 const defaultToken = "ee4ea75d8dc543df979af396f9fffe22";
