@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 
-const url = (token) => `https://blynk-cloud.com/${token}/project`;
+const url = (token) => `http://blynk-cloud.com/${token}/project`;
 const defaultToken = "ee4ea75d8dc543df979af396f9fffe22";
 
 function App() {
