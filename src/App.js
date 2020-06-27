@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
+import https from "https";
+
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
 
 const url = (token) => `http://blynk-cloud.com/${token}/project`;
 const defaultToken = "ee4ea75d8dc543df979af396f9fffe22";
@@ -21,6 +26,7 @@ function App() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
+        httpsAgent: agent,
       });
       setData(response.data);
     } catch (err) {
