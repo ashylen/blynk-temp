@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
+import { isMobile } from "react-device-detect";
 
-const url = (token) => `http://blynk-cloud.com/${token}/project`;
+const url = (token) => `://blynk-cloud.com/${token}/project`;
 const defaultToken = "ee4ea75d8dc543df979af396f9fffe22";
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
   const getData = async (token) => {
     try {
       setIsLoading(true);
-      const response = await axios.get(url(token));
+      const cert = isMobile ? "http" : "https";
+      const response = await axios.get(cert + url(token));
       setData(response.data);
     } catch (err) {
       console.log(err.response);
