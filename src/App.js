@@ -16,12 +16,7 @@ function App() {
   const getData = async (token) => {
     try {
       setIsLoading(true);
-      const response = await axios.get(url(token), {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.get(url(token));
       setData(response.data);
     } catch (err) {
       console.log(err.response);
