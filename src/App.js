@@ -1,23 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import axios from "axios";
 
 function App() {
+  const url =
+    "https://blynk-cloud.com/ee4ea75d8dc543df979af396f9fffe22/project";
+  const [data, setData] = useState({});
+
+  const getData = async () => {
+    try {
+      const response = await axios.get(url);
+      setData(response.data);
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Dane</h1>
+        {data ? (
+          <div>
+            {data &&
+              data.widgets &&
+              data.widgets.map((widget) => (
+                <p>
+                  {widget.label}: {widget.value}
+                  {widget.valueFormatting.slice(-2)}
+                </p>
+              ))}
+          </div>
+        ) : (
+          <p>Nie znaleziono danych</p>
+        )}
       </header>
     </div>
   );
