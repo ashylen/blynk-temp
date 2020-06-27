@@ -9,10 +9,10 @@ function App() {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  const [input, setInput] = useState({});
-  const [token, setToken] = useState("ee4ea75d8dc543df979af396f9fffe22");
+  const [input, setInput] = useState({ token: "" });
+  const [APIToken, setAPIToken] = useState("ee4ea75d8dc543df979af396f9fffe22");
 
-  const getData = async () => {
+  const getData = async (token) => {
     try {
       setIsLoading(true);
       const response = await axios.get(url(token));
@@ -30,20 +30,30 @@ function App() {
       [e.currentTarget.name]: e.currentTarget.value,
     });
 
-  const handleButtonClick = (e) => {
+  const handleButtonClick = async (e) => {
+    e.preventDefault();
+    setError("");
     if (input && input.token) {
-      setToken(input.token);
+      setAPIToken(input.token);
+      getData(input.token);
     }
+
+    setInput({ token: "" });
   };
 
   useEffect(() => {
-    getData();
+    getData(APIToken);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
+        {isLoading && (
+          <div className="img-wrapper">
+            <img src={logo} className="App-logo" alt="logo" />
+          </div>
+        )}
         <h1>Dane</h1>
         {data ? (
           <div>
@@ -59,18 +69,13 @@ function App() {
         ) : (
           <p>Nie znaleziono danych</p>
         )}
-        {isLoading && (
-          <div>
-            <p>Ładowanie...</p>
-            <img src={logo} className="App-logo" alt="logo" />
-          </div>
-        )}
 
         <div className="form-wrapper">
           <input
             type="text"
             name="token"
             onChange={handleInputChange}
+            value={input.token}
             placeholder="Wprowadź token"
           />
           <button onClick={handleButtonClick}>Pobierz dane</button>

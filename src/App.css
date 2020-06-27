@@ -3,8 +3,19 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 100px;
   pointer-events: none;
+}
+
+.img-wrapper {
+  position: fixed;
+  background-color: #282c34;
+  opacity: 0.5;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
