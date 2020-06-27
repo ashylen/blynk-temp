@@ -8,6 +8,7 @@ const defaultToken = "ee4ea75d8dc543df979af396f9fffe22";
 
 function App() {
   const [data, setData] = useState({});
+  const [showDetails, setShowDetails] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const [input, setInput] = useState({ token: "" });
@@ -57,16 +58,18 @@ function App() {
             <img src={logo} className="App-logo" alt="logo" />
           </div>
         )}
-        <h1>Dane</h1>
         {data ? (
           <div>
             {data &&
               data.widgets &&
               data.widgets.map((widget) => (
-                <p key={widget.id}>
-                  {widget.label}: {widget.value}
-                  {widget.valueFormatting.slice(-2)}
-                </p>
+                <h1 key={widget.id}>
+                  {widget.label}: <br />
+                  <b>
+                    {widget.value}
+                    {widget.valueFormatting.slice(-2)}
+                  </b>
+                </h1>
               ))}
           </div>
         ) : (
@@ -74,6 +77,10 @@ function App() {
         )}
 
         <div className="form-wrapper">
+          <button onClick={handleButtonClick}>Pobierz dane</button>
+          <button onClick={() => setShowDetails(!showDetails)}>
+            {!showDetails ? "Pokaż" : "Ukryj"} wszystkie dane
+          </button>
           <input
             type="text"
             name="token"
@@ -81,10 +88,11 @@ function App() {
             value={input.token}
             placeholder="Wprowadź token"
           />
-          <button onClick={handleButtonClick}>Pobierz dane</button>
         </div>
 
         {error && <span>{error}</span>}
+
+        {showDetails && <pre>{data && JSON.stringify(data, undefined, 4)}</pre>}
       </header>
     </div>
   );

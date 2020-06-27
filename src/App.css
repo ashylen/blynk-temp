@@ -7,6 +7,10 @@
   pointer-events: none;
 }
 
+h1 {
+  font-weight: 400;
+}
+
 .img-wrapper {
   position: fixed;
   background-color: #282c34;
@@ -39,10 +43,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  flex-flow: column;
 }
 
 .form-wrapper input {
-  height: 50px;
   font-size: 20px;
   padding: 5px;
   width: 100%;
@@ -56,10 +60,26 @@
   background: #d1d1d1;
   border-radius: 5px;
   margin: 10px;
+  color: #61dafb;
+  background-color: transparent;
+  border: 1px solid #61dafb;
+  outline: none;
+  transition: box-shadow 0.2s;
 }
+.form-wrapper button:active {
+  box-shadow: 0 0 10px #61dafb;
+}
+
 span {
   font-size: 8px;
   white-space: pre-wrap;
+}
+pre {
+  text-align: left;
+  overflow: auto;
+  max-width: 95%;
+  max-height: 400px;
+  font-size: 14px;
 }
 
 .App-link {
